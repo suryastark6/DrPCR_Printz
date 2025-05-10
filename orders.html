@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - DrPCR Printz</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/orders.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">DrPCR Printz</div>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="openNavDrawer()">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-overlay" id="navOverlay" onclick="closeNavDrawer()"></div>
+        <div class="nav-links nav-drawer" id="navLinks">
+            <button class="close-drawer" onclick="closeNavDrawer()" aria-label="Close">&times;</button>
+            <a href="index.html">Home</a>
+            <a href="designs.html">Designs</a>
+            <a href="upload.html">Upload Model</a>
+            <a href="orders.html" class="active">My Orders</a>
+            <div class="auth-buttons">
+                <button id="loginBtn" onclick="showLoginModal()">Login</button>
+                <button id="registerBtn" onclick="showRegisterModal()">Register</button>
+                <button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="orders-container">
+        <h1>My Orders</h1>
+
+        <div class="orders-filters">
+            <div class="search-box">
+                <input type="text" id="searchOrders" placeholder="Search orders...">
+            </div>
+            <div class="filter-box">
+                <select id="statusFilter">
+                    <option value="">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="processing">Processing</option>
+                    <option value="completed">Completed</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+                <select id="sortOrder">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="orders-list" id="ordersList">
+            <!-- Orders will be populated here -->
+        </div>
+
+        <div id="noOrders" class="no-orders" style="display: none;">
+            <h2>No Orders Found</h2>
+            <p>You haven't placed any orders yet.</p>
+            <a href="designs.html" class="browse-btn">Browse Designs</a>
+        </div>
+    </main>
+
+    <!-- Order Details Modal -->
+    <div id="orderDetailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('orderDetailsModal')">&times;</span>
+            <h2>Order Details</h2>
+            <div id="orderDetails"></div>
+            <div class="order-actions">
+                <button onclick="reorderItem()" class="reorder-btn">Reorder</button>
+                <button onclick="closeModal('orderDetailsModal')" class="close-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login/Register Modals (same as index.html) -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email:</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password:</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginType">Login as:</label>
+                    <select id="loginType" required>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Register</h2>
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="registerName">Full Name:</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email:</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password:</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 DrPCR Printz. All rights reserved.</p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/orders.js"></script>
+    <script>
+    function openNavDrawer() {
+        document.getElementById('navLinks').classList.add('open');
+        document.getElementById('navOverlay').classList.add('show');
+    }
+    function closeNavDrawer() {
+        document.getElementById('navLinks').classList.remove('open');
+        document.getElementById('navOverlay').classList.remove('show');
+    }
+    window.openNavDrawer = openNavDrawer;
+    window.closeNavDrawer = closeNavDrawer;
+    </script>
+</body>
+</html> 

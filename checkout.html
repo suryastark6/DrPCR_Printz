@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - DrPCR Printz</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/checkout.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">DrPCR Printz</div>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="openNavDrawer()">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-overlay" id="navOverlay" onclick="closeNavDrawer()"></div>
+        <div class="nav-links nav-drawer" id="navLinks">
+            <button class="close-drawer" onclick="closeNavDrawer()" aria-label="Close">&times;</button>
+            <a href="index.html">Home</a>
+            <a href="designs.html">Designs</a>
+            <a href="upload.html">Upload Model</a>
+            <a href="orders.html">My Orders</a>
+            <div class="auth-buttons">
+                <button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="checkout-container">
+        <h1>Checkout</h1>
+        <div class="checkout-content">
+            <div class="order-summary" id="orderSummary">
+                <!-- Order summary will be populated by JS -->
+            </div>
+            <form id="checkoutForm" class="checkout-form" onsubmit="handleCheckout(event)">
+                <h2>Delivery Details</h2>
+                <div class="form-group">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <textarea id="address" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="city">City:</label>
+                    <input type="text" id="city" required>
+                </div>
+                <div class="form-group">
+                    <label for="state">State:</label>
+                    <input type="text" id="state" required>
+                </div>
+                <div class="form-group">
+                    <label for="pincode">Pincode:</label>
+                    <input type="text" id="pincode" required pattern="\d{6}">
+                </div>
+                <div class="form-group">
+                    <label for="contact">Contact Number:</label>
+                    <input type="tel" id="contact" required pattern="[0-9]{10}">
+                </div>
+                <div class="form-group">
+                    <label for="paymentType">Payment Type:</label>
+                    <select id="paymentType" required>
+                        <option value="COD">Cash on Delivery</option>
+                        <option value="UPI">UPI</option>
+                        <option value="Card">Credit/Debit Card</option>
+                    </select>
+                </div>
+                <button type="submit" class="place-order-btn">Place Order</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 DrPCR Printz. All rights reserved.</p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/checkout.js"></script>
+    <script>
+    function openNavDrawer() {
+        document.getElementById('navLinks').classList.add('open');
+        document.getElementById('navOverlay').classList.add('show');
+    }
+    function closeNavDrawer() {
+        document.getElementById('navLinks').classList.remove('open');
+        document.getElementById('navOverlay').classList.remove('show');
+    }
+    window.openNavDrawer = openNavDrawer;
+    window.closeNavDrawer = closeNavDrawer;
+    </script>
+</body>
+</html> 

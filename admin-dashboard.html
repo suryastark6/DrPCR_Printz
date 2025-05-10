@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - DrPCR Printz</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">DrPCR Printz</div>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="openNavDrawer()">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-overlay" id="navOverlay" onclick="closeNavDrawer()"></div>
+        <div class="nav-links nav-drawer" id="navLinks">
+            <button class="close-drawer" onclick="closeNavDrawer()" aria-label="Close">&times;</button>
+            <a href="index.html">Home</a>
+            <a href="admin-dashboard.html" class="active">Dashboard</a>
+            <button id="logoutBtn" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <main class="admin-container">
+        <div class="admin-header">
+            <h1>Admin Dashboard</h1>
+            <button onclick="showAddDesignModal()" class="add-design-btn">Add New Design</button>
+        </div>
+
+        <div class="admin-tabs">
+            <button class="tab-btn active" onclick="switchTab('designs')">Manage Designs</button>
+            <button class="tab-btn" onclick="switchTab('orders')">View Orders</button>
+        </div>
+
+        <div id="designsTab" class="tab-content active">
+            <div class="designs-list" id="designsList">
+                <!-- Designs will be populated here -->
+            </div>
+        </div>
+
+        <div id="ordersTab" class="tab-content">
+            <div class="orders-list" id="ordersList">
+                <!-- Orders will be populated here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Add/Edit Design Modal -->
+    <div id="designFormModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('designFormModal')">&times;</span>
+            <h2 id="designFormTitle">Add New Design</h2>
+            <form id="designForm" onsubmit="handleDesignSubmit(event)">
+                <div class="form-group">
+                    <label for="designName">Design Name:</label>
+                    <input type="text" id="designName" required>
+                </div>
+                <div class="form-group">
+                    <label for="designDescription">Description:</label>
+                    <textarea id="designDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="designCategory">Category:</label>
+                    <select id="designCategory" required>
+                        <option value="household">Household</option>
+                        <option value="toys">Toys</option>
+                        <option value="art">Art</option>
+                        <option value="tools">Tools</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="designPrice">Price ($):</label>
+                    <input type="number" id="designPrice" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="designImage">Image URL:</label>
+                    <input type="text" id="designImage" required>
+                </div>
+                <input type="hidden" id="designId">
+                <button type="submit" id="designSubmitBtn">Add Design</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div id="orderDetailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('orderDetailsModal')">&times;</span>
+            <h2>Order Details</h2>
+            <div id="orderDetails"></div>
+            <div class="order-actions">
+                <select id="orderStatus">
+                    <option value="pending">Pending</option>
+                    <option value="processing">Processing</option>
+                    <option value="completed">Completed</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+                <button onclick="updateOrderStatus()">Update Status</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 DrPCR Printz. All rights reserved.</p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+    <script>
+    function openNavDrawer() {
+        document.getElementById('navLinks').classList.add('open');
+        document.getElementById('navOverlay').classList.add('show');
+    }
+    function closeNavDrawer() {
+        document.getElementById('navLinks').classList.remove('open');
+        document.getElementById('navOverlay').classList.remove('show');
+    }
+    window.openNavDrawer = openNavDrawer;
+    window.closeNavDrawer = closeNavDrawer;
+    </script>
+</body>
+</html> 

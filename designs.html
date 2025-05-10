@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Designs - DrPCR Printz</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/designs.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">DrPCR Printz</div>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="openNavDrawer()">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-overlay" id="navOverlay" onclick="closeNavDrawer()"></div>
+        <div class="nav-links nav-drawer" id="navLinks">
+            <button class="close-drawer" onclick="closeNavDrawer()" aria-label="Close">&times;</button>
+            <a href="index.html">Home</a>
+            <a href="designs.html" class="active">Designs</a>
+            <a href="upload.html">Upload Model</a>
+            <a href="orders.html">My Orders</a>
+            <div class="auth-buttons">
+                <button id="loginBtn" onclick="showLoginModal()">Login</button>
+                <button id="registerBtn" onclick="showRegisterModal()">Register</button>
+                <button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="designs-container">
+        <h1>3D Print Designs</h1>
+        
+        <div class="filters">
+            <input type="text" id="searchDesign" placeholder="Search designs...">
+            <select id="categoryFilter">
+                <option value="">All Categories</option>
+                <option value="household">Household</option>
+                <option value="toys">Toys</option>
+                <option value="art">Art</option>
+                <option value="tools">Tools</option>
+            </select>
+        </div>
+
+        <div class="designs-grid" id="designsGrid">
+            <!-- Designs will be populated here by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Design Details Modal -->
+    <div id="designModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('designModal')">&times;</span>
+            <div id="designDetails">
+                <img id="modalDesignImage" src="" alt="Design Preview">
+                <h2 id="modalDesignName"></h2>
+                <p id="modalDesignDescription"></p>
+                <div class="design-options">
+                    <div class="form-group">
+                        <label for="colorSelect">Select Color:</label>
+                        <select id="colorSelect">
+                            <option value="white">White</option>
+                            <option value="black">Black</option>
+                            <option value="red">Red</option>
+                            <option value="blue">Blue</option>
+                            <option value="green">Green</option>
+                            <option value="yellow">Yellow</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" min="1" value="1">
+                    </div>
+                </div>
+                <div class="price-info">
+                    <p>Price per unit: $<span id="pricePerUnit">0</span></p>
+                    <p>Total price: $<span id="totalPrice">0</span></p>
+                </div>
+                <button onclick="placeOrder()" class="order-btn">Place Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login/Register Modals (same as index.html) -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email:</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password:</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginType">Login as:</label>
+                    <select id="loginType" required>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Register</h2>
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="registerName">Full Name:</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email:</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password:</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 DrPCR Printz. All rights reserved.</p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/designs.js"></script>
+    <script>
+    function openNavDrawer() {
+        document.getElementById('navLinks').classList.add('open');
+        document.getElementById('navOverlay').classList.add('show');
+    }
+    function closeNavDrawer() {
+        document.getElementById('navLinks').classList.remove('open');
+        document.getElementById('navOverlay').classList.remove('show');
+    }
+    window.openNavDrawer = openNavDrawer;
+    window.closeNavDrawer = closeNavDrawer;
+    </script>
+</body>
+</html> 

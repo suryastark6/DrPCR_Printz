@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrPCR Printz - 3D Printing Solutions</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">DrPCR Printz</div>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="openNavDrawer()">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-overlay" id="navOverlay" onclick="closeNavDrawer()"></div>
+        <div class="nav-links nav-drawer" id="navLinks">
+            <button class="close-drawer" onclick="closeNavDrawer()" aria-label="Close">&times;</button>
+            <a href="index.html" class="active">Home</a>
+            <a href="designs.html">Designs</a>
+            <a href="upload.html">Upload Model</a>
+            <a href="orders.html">My Orders</a>
+            <div class="auth-buttons">
+                <button id="loginBtn" onclick="showLoginModal()">Login</button>
+                <button id="registerBtn" onclick="showRegisterModal()">Register</button>
+                <button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <h1>Welcome to DrPCR Printz</h1>
+            <p>Your One-Stop Solution for Premium 3D Printing Services</p>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <img src="https://cdn.jsdelivr.net/gh/feathericons/feather@4.28.0/icons/grid.svg" alt="Browse Designs" style="width:64px;height:64px;">
+                <h3>Browse Designs</h3>
+                <p>Explore our collection of pre-built 3D designs</p>
+            </div>
+            <div class="feature-card">
+                <img src="https://cdn.jsdelivr.net/gh/feathericons/feather@4.28.0/icons/upload-cloud.svg" alt="Upload Models" style="width:64px;height:64px;">
+                <h3>Upload Models</h3>
+                <p>Upload your custom 3D models for printing</p>
+            </div>
+            <div class="feature-card">
+                <img src="https://cdn.jsdelivr.net/gh/feathericons/feather@4.28.0/icons/sliders.svg" alt="Customize" style="width:64px;height:64px;">
+                <h3>Customize</h3>
+                <p>Choose colors and specifications for your prints</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email:</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password:</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginType">Login as:</label>
+                    <select id="loginType" required>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Register</h2>
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="registerName">Full Name:</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email:</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password:</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 DrPCR Printz. All rights reserved.</p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+    function openNavDrawer() {
+        document.getElementById('navLinks').classList.add('open');
+        document.getElementById('navOverlay').classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeNavDrawer() {
+        document.getElementById('navLinks').classList.remove('open');
+        document.getElementById('navOverlay').classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    // Close nav drawer when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', closeNavDrawer);
+    });
+
+    // Close nav drawer when screen size becomes large
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+            closeNavDrawer();
+        }
+    });
+
+    window.openNavDrawer = openNavDrawer;
+    window.closeNavDrawer = closeNavDrawer;
+    </script>
+</body>
+</html> 
